@@ -1,4 +1,4 @@
-[过程文章](https://wozhaodiaodiao.github.io/2020/03/18/js%E6%98%AF%E5%90%A6%E6%98%AF%E8%A7%A3%E9%87%8A%E6%80%A7%E8%AF%AD%E8%A8%80/)
+[过程文章](https://wozhaodiaodiao.github.io/2020/03/02/vue-ssr%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93%E6%96%B9%E6%A1%88/)
 
 # vuessr
 

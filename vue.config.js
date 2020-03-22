@@ -2,14 +2,13 @@ const ClientPlugin = require('vue-server-renderer/client-plugin'),//生成客户
     nodeExternals = require('webpack-node-externals');//忽略node_modules文件夹中的所有模块
 module.exports = {
     devServer: {
-        proxy: 'http://localhost:8080'
+        proxy: 'http://localhost:8080'//通过这个服务地址进行前端打包文件的获取
     },
     outputDir: 'dist/',
     configureWebpack: (config) => {
         return ({
             entry: `./src/entry/client`,
             output: {
-
                 filename: 'js/[name].js',
                 chunkFilename: 'js/[name].js',
                 libraryTarget:  undefined
@@ -17,7 +16,7 @@ module.exports = {
             target:  'web',
             externals:  undefined,
             plugins: [
-               new ClientPlugin(),
+               new ClientPlugin(),//根据环境调用不同的渲染插件。
             ]
         })
     },

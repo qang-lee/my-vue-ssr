@@ -1,26 +1,26 @@
 const ServerPlugin = require('vue-server-renderer/server-plugin'),//生成服务端清单
   nodeExternals = require('webpack-node-externals');//忽略node_modules文件夹中的所有模块
-const ExtractPlugin = require('extract-text-webpack-plugin')
+// const ExtractPlugin = require('extract-text-webpack-plugin')
 const utils = require('util')
 const path = require('path')
-const merge = require('webpack-merge')
-const baseConfig = require('./webpack.config.base');
+// const merge = require('webpack-merge')
+// const baseConfig = require('./webpack.config.base');
 const createVueLoaderOptions = require('./vue-loader.config')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
-  target: 'node',
-  entry: `./src/entry/server`,
-  devtool: 'source-map',
+  target: 'node',//1，首先指定node平台，这个是要在服务器端进行配置的
+  entry: `./src/entry/server`,//2. 指定入口文件
+  devtool: 'source-map',//3. 开启sourcemap
   output: {
     libraryTarget: 'commonjs2',
     filename: 'server-entry.js',
     path: path.join(__dirname, '../distDev')
   },
-  externals: Object.keys(require('../package.json').dependencies),
+  externals: Object.keys(require('../package.json').dependencies),//一些库在前端都已经打包好了，服务端做下排除
   plugins: [
-    new ServerPlugin(),
-    new VueLoaderPlugin(),
+    new ServerPlugin(),//真多服务器端点用服务器端插件
+    new VueLoaderPlugin(),//不加不行。。
   ],
   module: {
     rules: [
@@ -55,22 +55,6 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.styl/,
-        use: ExtractPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            'stylus-loader'
-          ]
-        })
       }
     ]
   }
